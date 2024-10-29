@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+ 
+# Build output
+build/
+ 
+# Static files
+*.log
+*.env
+*.local
+ 
+# Testing
+coverage/
+ 
+# Miscellaneous
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.vscode/
+ 
+# IDE files
+.idea/
+ 
+# System files
+Thumbs.db

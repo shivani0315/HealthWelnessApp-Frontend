@@ -1,0 +1,21 @@
+{
+  "name": "Health and Wellness App",
+  "short_name": "WellnessApp",
+  "description": "An application focused on health and wellness, featuring fitness tracking, nutrition planning, and mental health support.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4A90E2",
+  "icons": [
+      {
+          "src": "images/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      },
+      {
+          "src": "images/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ]
+}
