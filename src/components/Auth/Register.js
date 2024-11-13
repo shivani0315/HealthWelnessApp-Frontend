@@ -14,7 +14,7 @@ const Register = () => {
     setError('');  // Reset the error message
 
     try {
-      const response = await axios.post('https://healthwelnessapp.onrender.com', { name, email, password });
+      const response = await axios.post('https://healthwelnessapp.onrender.com/api/users/register', { name, email, password });
       if (response.data) {
         // Navigate to login page if registration is successful
         navigate('/login');
