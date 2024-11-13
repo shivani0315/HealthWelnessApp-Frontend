@@ -32,13 +32,13 @@ const Dashboard = () => {
 
     try {
       const [exercisesResponse, nutritionResponse, goalsResponse] = await Promise.all([
-        axios.get('http://localhost:5000/api/exercises', {
+        axios.get('https://healthwelnessapp.onrender.com/api/exercises', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:5000/api/nutrition', {
+        axios.get('https://healthwelnessapp.onrender.com/api/nutrition', {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get('http://localhost:5000/api/goals', {
+        axios.get('https://healthwelnessapp.onrender.com/api/goals', {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
