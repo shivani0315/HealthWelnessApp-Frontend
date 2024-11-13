@@ -28,6 +28,8 @@ const Dashboard = () => {
       return;
     }
 
+    
+
     try {
       const [exercisesResponse, nutritionResponse, goalsResponse] = await Promise.all([
         axios.get('http://localhost:5000/api/exercises', {

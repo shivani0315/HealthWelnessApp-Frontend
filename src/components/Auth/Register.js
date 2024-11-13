@@ -1,4 +1,3 @@
-// frontend/src/components/Auth/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +11,23 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError('');  // Reset the error message
+
     try {
-      await axios.post('http://localhost:5000/api/users/register', { name, email, password });
-      navigate('/login');
+      const response = await axios.post('http://localhost:5000/api/users/register', { name, email, password });
+      if (response.data) {
+        // Navigate to login page if registration is successful
+        navigate('/login');
+      }
     } catch (error) {
-      console.error(error.response.data);
-      setError('Registration failed. Please try again.');
+      // Check if error.response exists
+      if (error.response && error.response.data) {
+        // Display the error message from the backend
+        setError(error.response.data.message || 'Registration failed. Please try again.');
+      } else {
+        // If error.response is undefined, display a generic error message
+        setError('An error occurred. Please check your internet connection or try again later.');
+      }
     }
   };
 

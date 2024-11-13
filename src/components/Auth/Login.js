@@ -18,24 +18,38 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
 
-      // Extract the token from the response
-      const token = response.data.token; 
-      localStorage.setItem('token', token); // Store the token
+      // Check if the response contains the expected token
+      if (response.data && response.data.token) {
+        const token = response.data.token;
+        localStorage.setItem('token', token); // Store the token
 
-      // Assuming your backend returns user info in response.data.user
-      const userInfo = response.data.user; // Get user info (adjust based on your API response)
+        // Assuming your backend returns user info in response.data.user
+        const userInfo = response.data.user;
 
-      // Use the login function to set the user in AuthContext
-      login({ token, ...userInfo }); 
+        // Use the login function to set the user in AuthContext
+        login({ token, ...userInfo });
 
-      console.log('Login successful, token:', token); // Log the token
-      console.log('Redirecting to dashboard...');
-      navigate('/dashboard'); // Redirect to dashboard
+        console.log('Login successful, token:', token);
+        navigate('/dashboard'); // Redirect to dashboard
+      } else {
+        setError('Invalid response data.');
+      }
     } catch (error) {
       // Improved error handling
-      const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials.'; // Display more detailed error message
-      console.error('Error during login:', errorMessage); // Log detailed error info
-      setError(errorMessage); // Set error message
+      if (error.response) {
+        // Handle backend error response
+        const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials.';
+        console.error('Error during login:', errorMessage);
+        setError(errorMessage); // Set error message
+      } else if (error.request) {
+        // Handle no response case
+        console.error('No response received:', error.request);
+        setError('No response from the server. Please check your connection.');
+      } else {
+        // General error catch
+        console.error('Error message:', error.message);
+        setError('Something went wrong. Please try again.');
+      }
     }
   };
 
