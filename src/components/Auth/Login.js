@@ -16,7 +16,7 @@ const Login = () => {
     setError(''); // Clear previous errors
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const response = await axios.post('https://healthwelnessapp.onrender.com', { email, password });
 
       // Check if the response contains the expected token
       if (response.data && response.data.token) {
