@@ -52,7 +52,7 @@ const GoalSettingPage = () => {
         const token = localStorage.getItem('token');
         try {
             await axios.put(
-                'http://localhost:5000/api/goals/update', 
+                'https://healthwelnessapp.onrender.com/api/goals/update', 
                 { type: goalType, target: newTarget }, 
                 { headers: { Authorization: `Bearer ${token}` }}
             );
@@ -72,6 +72,14 @@ const GoalSettingPage = () => {
             return;
         }
 
+        // Convert newGoalTarget to a number to match backend expectations
+        const goalTarget = Number(newGoalTarget);
+        if (isNaN(goalTarget) || goalTarget <= 0) {
+            setErrorMessage('Please enter a valid target number greater than 0.');
+            console.error('Invalid target value:', newGoalTarget);
+            return;
+        }
+
         // Check for duplicates
         if (goals.some(goal => goal.type === newGoalType)) {
             setErrorMessage(`Goal of type "${newGoalType}" already exists.`);
@@ -80,16 +88,25 @@ const GoalSettingPage = () => {
         }
 
         const token = localStorage.getItem('token');
+        if (!token) {
+            setErrorMessage('Authorization token is missing or expired.');
+            console.error('Token missing in local storage.');
+            return;
+        }
+
         try {
-            await axios.post(
-                'http://localhost:5000/api/goals', 
-                { type: newGoalType, target: newGoalTarget }, 
+            const response = await axios.post(
+                'https://healthwelnessapp.onrender.com/api/goals', 
+                { type: newGoalType, target: goalTarget }, 
                 { headers: { Authorization: `Bearer ${token}` }}
             );
+            console.log('Goal set response:', response.data); // Log response for debugging
+
             fetchGoalData();
             setNewGoalType('');
             setNewGoalTarget('');
         } catch (error) {
+            setErrorMessage('Error setting new goal. Please try again.');
             console.error('Error setting new goal:', error.response ? error.response.data : error.message);
         }
     };

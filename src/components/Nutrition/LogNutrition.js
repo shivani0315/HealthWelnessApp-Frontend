@@ -21,7 +21,7 @@ const LogNutrition = ({ onClose }) => {
       }
 
       const nutritionData = { food, calories, protein, carbs, fats };
-      await axios.post('http://localhost:5000/api/nutrition', nutritionData, {
+      await axios.post('https://healthwelnessapp.onrender.com/api/nutrition', nutritionData, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

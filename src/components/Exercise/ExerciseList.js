@@ -11,7 +11,7 @@ const ExerciseList = () => {
     const fetchExercises = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:5000/api/exercises', {
+        const response = await axios.get('https://healthwelnessapp.onrender.com/api/exercises', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setExercises(response.data);

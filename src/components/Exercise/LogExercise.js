@@ -11,7 +11,7 @@ const LogExercise = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/exercises', { type, duration, distance, calories }, {
+      await axios.post('https://healthwelnessapp.onrender.com/api/exercises', { type, duration, distance, calories }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       alert('Exercise logged successfully');

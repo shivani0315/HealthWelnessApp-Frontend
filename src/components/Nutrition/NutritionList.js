@@ -10,7 +10,7 @@ const NutritionList = () => {
     const fetchNutrition = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:5000/api/nutrition', {
+        const response = await axios.get('https://healthwelnessapp.onrender.com/api/nutrition', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setNutrition(response.data);
